@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #from scrapy.Spider import Spider #wrong path
 import scrapy
 from Manong.items import ManongItem
@@ -16,15 +17,10 @@ class MaNongSpider(scrapy.spiders.Spider):
 
 	def parse_issue(self,response):
 		print('parse_issue in ==============================')
-		count =0;
-		for sel in response.xpath("//body[@class='issue']"):
-			print sel.extract()
+		for sel in response.xpath("//body[@class='issue']/h4"):
+			print sel.extract().encode('utf-8').decode('utf-8')
 			item=ManongItem()
-			item['desc']=sel.xpath("/p").extract()
-			item['address']=sel.xpath("/h4/a/@href").extract()
-			item['title']=sel.xpath("/h4/a/text()").extract()
+			item['desc']=sel.xpath("//..").xpath("//p/text()").extract().encode('utf-8').decode('urf-8')
+			item['address']=sel.xpath("//a/@href").extract()
+			item['title']=sel.xpath("//a/text()").extract().encode('utf-8').decode('utf-8')
 			yield item
-			count=count+1
-			if(count>2):
-				print("parse_issue twice *******************************")
-				break
