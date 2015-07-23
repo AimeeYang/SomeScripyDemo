@@ -8,7 +8,12 @@
 import scrapy
 
 
+#item for the links in the issue
+# define the fields for your item here like:
+# name = scrapy.Field()
 class ManongItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+	title=scrapy.Field()
+	desc=scrapy.Field()
+	address=scrapy.Field()
+    
+	
